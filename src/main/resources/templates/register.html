@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+	<title th:text="#{registration.title}">Insert title here</title>
+</head>
+<body>
+	<div class="mx-auto container" >
+		
+				
+		<div class="row justify-content-center">			
+			<form th:object="${user}" th:action="@{/register}" method="post" >				
+				<legend class="text-center" th:text="#{registration.legend}"></legend>				
+				<div class="form-group">
+					<label for="firstname" th:text="#{registration.firstname}"></label>					
+					<input type="text" th:field="*{firstname}"  id="firstname" class="form-control" th:placeholder="#{registration.firstname}"/>
+					<div class="text-danger small" th:if="${#fields.hasErrors('firstname')}" th:errors="*{firstname}"></div>
+					
+				</div>	
+				<div class="form-group">
+					<label for="lastname" th:text="#{registration.lastname}"></label>					
+					<input type="text" th:field="*{lastname}" name="lastname" id="lastname" class="form-control" th:placeholder="#{registration.lastname}"/>
+					<div class="text-danger small" th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}"></div>
+				</div>	
+				<div class="form-group">
+					<label for="email" th:text="#{registration.email}"></label>
+					<input type="text" th:field="*{email}" name="email" id="email" class="form-control" th:placeholder="#{registration.email}"/>
+					<div class="text-danger small" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+				</div>			
+				<div class="form-group">
+					<label for="password" th:text="#{registration.password}"></label>					
+					<input type="password" th:field="*{password}" name="password" id="password" class="form-control" th:placeholder="#{registration.password}"/>
+					<div class="text-danger small" th:if="${#fields.hasErrors('password')}" th:errors="*{password}" ></div>
+				</div>
+				<div class="form-group">
+					<label for="passwordConfirm" th:text="#{registration.passwordConfirm}"></label>					
+					<input type="password" th:field="*{passwordConfirm}" name="passwordConfirm" id="passwordConfirm" class="form-control" th:placeholder="#{registration.passwordConfirm}"/>
+					<div class="text-danger small" th:if="${#fields.hasErrors('global')}" th:errors="*{global}"></div>
+				</div>
+
+				<input type="submit" class="btn btn-primary float-right" th:value="#{registration.submit}">
+			</form>
+		</div>
+	</div>
+</body>
+</html>
