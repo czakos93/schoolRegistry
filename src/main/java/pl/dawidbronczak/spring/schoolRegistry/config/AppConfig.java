@@ -2,6 +2,7 @@ package pl.dawidbronczak.spring.schoolRegistry.config;
 
 import java.util.Locale;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -32,17 +33,21 @@ public class AppConfig implements WebMvcConfigurer {
 	    LocaleChangeInterceptor lci = new LocaleChangeInterceptor();
 	    lci.setParamName("lang");
 	    return lci;
-	}
-
-	
-	
+	}	
 	
 	public void addInterceptors(InterceptorRegistry registry) {
 	       registry.addInterceptor(localeChangeInterceptor());
-	   }
+	}
+	
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
-	registry.addViewController("/login").setViewName("login");
+		registry.addViewController("/login").setViewName("login");
+	}
+	
+	@Bean
+	public ModelMapper modelMapper(){
+		ModelMapper modelMapper = new ModelMapper();
+		return modelMapper;
 	}
 	
 }
