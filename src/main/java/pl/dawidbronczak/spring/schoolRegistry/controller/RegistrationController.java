@@ -40,6 +40,6 @@ public class RegistrationController {
 			return "/register";
 		}
 		userService.saveUser(user);		
-		return "redirect:/desktop";
+		return "redirect:/login";
 	}
 }

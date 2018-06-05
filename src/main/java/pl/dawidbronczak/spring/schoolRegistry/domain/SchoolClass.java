@@ -24,7 +24,7 @@ public class SchoolClass {
 	@Column(name = "NAME")
 	private String name;
 	
-	@OneToMany(mappedBy = "schoolClass", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "schoolClass")
 	private List<Student> students;
 
 	public int getId() {

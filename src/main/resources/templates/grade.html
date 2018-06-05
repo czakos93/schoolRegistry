@@ -7,9 +7,30 @@
 	<title th:text="#{grade.title}"></title>
 </head>
 <body>
+<header>
+	<nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+		<div class="collapse navbar-collapse">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item btn text-light"><a th:href="@{/desktop}" th:text="#{desktop.title}"> </a></li>
+				<li class="nav-item btn text-light"><a th:href="@{/class(id=${loggedUser.schoolClass.id})}" th:text="#{desktop.schoolClass}"> </a></li>
+			</ul>
+			<form class="form-inline mt-2 mt-md-0 " method="POST" th:action="@{/logout}">
+				<label class="mr-3 text-light" th:text="${loggedUser.firstname}+' '+${loggedUser.lastname}"></label>
+				<input  class="btn btn-primary btn-sm" type="submit" th:value="#{submit.logout}"/>
+       			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>	
+			</form>
+		</div>
+	</nav>
+</header>
 	 <main role="main" class="container pt-5">
 		<div class="starter-template">
-			<h3 th:text="${grade}"></h3>
+			<h3 th:text="#{grade.gradeValue}+' '+${grade.grade}"></h3>
+			<table class="table">
+				<tr><td th:text="#{grade.teacher}"></td><td th:text="${grade.subject.leadTeacher.lastname}+' '+${grade.subject.leadTeacher.firstname}"></td></tr>
+				<tr><td th:text="#{grade.description}"></td><td th:text="${grade.description}"></td></tr>
+				<tr><td th:text="#{grade.owner}"></td><td th:text="${grade.owner.lastname}+' '+${grade.owner.firstname}"></td></tr>
+				<tr><td th:text="#{grade.subject}"></td><td th:text="${grade.subject.name}"></td></tr>
+			</table>
 		</div>
 	</main>
 

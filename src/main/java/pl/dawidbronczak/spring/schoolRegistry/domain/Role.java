@@ -1,6 +1,7 @@
 package pl.dawidbronczak.spring.schoolRegistry.domain;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,6 +22,9 @@ public class Role {
 	
 	@Column(name = "ROLE")
 	private String roleName;
+	
+	@ManyToMany(mappedBy = "roles")
+	private Set<User> users;
 
 	public int getId() {
 		return id;
@@ -36,6 +40,14 @@ public class Role {
 
 	public void setRoleName(String roleName) {
 		this.roleName = roleName;
+	}
+
+	public Set<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(Set<User> users) {
+		this.users = users;
 	}
 	
 	

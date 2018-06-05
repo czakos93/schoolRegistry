@@ -1,5 +1,6 @@
 package pl.dawidbronczak.spring.schoolRegistry.service.implementation;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +18,24 @@ public class SchoolClassServiceImpl implements SchoolClassService {
 	
 	@Override
 	public SchoolClass findClassById(int id) {
-		Optional<SchoolClass> schoolClass = schoolClassRepository.findById(id);		
-		return schoolClass.get();
+		return schoolClassRepository.findById(id).get();
+	}
+
+	@Override
+	public List<SchoolClass> findAll() {
+		return (List<SchoolClass>) schoolClassRepository.findAll();
+	}
+
+	@Override
+	public void remove(int classId) {
+		schoolClassRepository.deleteById(classId);
+		
+	}
+
+	@Override
+	public void save(SchoolClass schoolClass) {
+		schoolClassRepository.save(schoolClass);
+		
 	}
 
 }

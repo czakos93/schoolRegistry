@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+	<title th:text="#{users.title}"></title>
+</head>
+<body>
+<main class="container pt-5" >
+	<div class="starter-template">
+		<h3 th:text="#{users.title}"></h3>
+		<h5 th:text="#{users.all}"></h5>
+		<table class="table">
+			<tr th:each="user : ${users}">
+				<td th:text="#{user.login}+' '+${user.email}"></td>
+				<td th:text="#{user.name}+' '+${user.lastname}+' '+${user.firstname}"></td>
+				<td><a th:href="@{user/edit(id=${user.id})}" th:text="#{users.edit}"></a></td>
+				<td><a th:href="@{user/remove(id=${user.id})}" th:text="#{users.remove}"></a></td>
+			</tr>
+		</table>
+	</div>
+</main>
+
+</body>
+</html>

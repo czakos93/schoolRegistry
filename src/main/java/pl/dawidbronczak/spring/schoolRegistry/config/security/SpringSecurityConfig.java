@@ -13,6 +13,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -21,6 +22,9 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
 	private UserDetailsService userDetailsService;
+	
+	@Autowired
+	private AuthenticationSuccessHandler successHandler;
 	
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder() {
@@ -47,12 +51,21 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         http
         	.authorizeRequests()
         		.antMatchers("/register").permitAll()
+        		.antMatchers("/admin","/admin/**").hasRole("ADMIN")
+        		.antMatchers("/teacher-desktop","/teacher-desktop/**").hasRole("TEACHER")
+        		.antMatchers("/","desktop","/desktop/**").hasRole("STUDENT")
         		.anyRequest().authenticated()
         		.and()
         	.formLogin()
+        		.successHandler(successHandler)
         		.loginPage("/login")
         		.usernameParameter("email")
-        		.defaultSuccessUrl("/desktop.html")
-        		.permitAll();  
+        		.permitAll()
+        		.and()
+        	.logout()
+        		.logoutUrl("/logout")                                                 
+        		.logoutSuccessUrl("/login")                                       
+        		.invalidateHttpSession(true);                                  
+			
         }
 }

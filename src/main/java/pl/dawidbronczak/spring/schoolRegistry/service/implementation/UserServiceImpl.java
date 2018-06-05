@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -37,14 +38,10 @@ public class UserServiceImpl implements UserService {
 	}	
 
 	@Override
-	public void saveUser(User user) {
+	public void create(User user) {
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
-		Role role = roleService.findByRoleName("ROLE_USER");
-		System.out.println(role.getRoleName());
-		user.setRoles(Arrays.asList(role));
-		for(Role roletemp : user.getRoles()){
-			System.out.println(roletemp.getRoleName());
-		}
+		Role role = roleService.findByRoleName("ROLE_USER");		
+		user.getRoles().add(role);
 		userRepository.save(user);		
 	}
 
@@ -52,5 +49,27 @@ public class UserServiceImpl implements UserService {
 	public User findByEmail(String email) {		
 		return userRepository.findByEmail(email);
 	}
+
+	@Override
+	public java.util.List<User> findAll() {
+		return (java.util.List<User>) userRepository.findAll();
+	}
+
+	@Override
+	public void remove(int userId) {
+		userRepository.deleteById(userId);
+	}
+
+	@Override
+	public User findById(int userId) {
+		return userRepository.findById(userId).get();
+	}
+
+	@Override
+	public void save(User user) {
+		userRepository.save(user);
+		
+	}
+
 
 }

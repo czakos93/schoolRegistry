@@ -31,10 +31,20 @@ public class DesktopController {
 	@Autowired
 	GradeService gradeService;
 	
-	@GetMapping("/desktop")
+	@GetMapping(value={"/","/desktop"})
 	public String showDesktop(Model model, Principal principal){
-		Student loggedUser = studentService.findByEmail(principal.getName());
-		model.addAttribute("loggedUser", loggedUser);
+
 		return "desktop";
+	}
+	
+	@GetMapping("/user-desktop")
+	public String showUserDesktop(){
+		return "userDesktop.html";
+	}
+	
+
+	@GetMapping("/teacher-desktop")
+	public String showTeacherPage(){
+		return "teacherDesktop.html";
 	}
 }

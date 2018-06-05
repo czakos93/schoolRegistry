@@ -5,8 +5,7 @@
 
 	<groupId>pl.dawidbronczak.spring</groupId>
 	<artifactId>schoolRegistry</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<version>0.1.2</version>
 
 	<name>school registry</name>
 	<description>web app using jpa + spring security</description>
@@ -33,6 +32,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-jdbc</artifactId>
 		</dependency>
+	
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
@@ -89,14 +89,16 @@
 			<artifactId>spring-boot-configuration-processor</artifactId>
 			<optional>true</optional>
 		</dependency>
-	</dependencies>
-
+</dependencies>
 	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				
 			</plugin>
+			
+			
 		</plugins>
 	</build>
 

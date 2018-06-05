@@ -16,7 +16,7 @@ public class GradeController {
 	
 	@GetMapping("/grade")
 	public String shwoGrade(Model model, @RequestParam("id") int id) {
-		model.addAttribute("subject", gradeService.findGradeById(id));
+		model.addAttribute("grade", gradeService.findGradeById(id));
 		return "grade";
 		
 	}

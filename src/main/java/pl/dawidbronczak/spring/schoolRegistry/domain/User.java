@@ -2,7 +2,9 @@ package pl.dawidbronczak.spring.schoolRegistry.domain;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -42,10 +44,8 @@ public class User {
 	@Column(name = "PASSWORD")
 	String password;
 	
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinTable(name = "USERS_ROLES",	joinColumns = @JoinColumn(name = "USER_ID", referencedColumnName = "ID"),
-    									inverseJoinColumns = @JoinColumn(name = "ROLE_ID", referencedColumnName = "ID"))
-	private Collection<Role> roles;
+	@ManyToMany(fetch = FetchType.EAGER)
+	private Set<Role> roles = new HashSet<Role>();
 
 	public int getId() {
 		return id;
@@ -87,11 +87,11 @@ public class User {
 		this.password = password;
 	}
 
-	public Collection<Role> getRoles() {
+	public Set<Role> getRoles() {
 		return roles;
 	}
 
-	public void setRoles(Collection<Role> roles) {
+	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
 	}
 	
