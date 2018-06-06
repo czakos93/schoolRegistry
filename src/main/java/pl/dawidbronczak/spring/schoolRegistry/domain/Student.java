@@ -39,7 +39,16 @@ public class Student extends User {
 	@MapKeyJoinColumn(name = "SUBJECT_ID")
 	private Map<Subject, GradesList> gradesMap = new TreeMap<Subject, GradesList>();
 	
+	public Student(){
+		
+	}
 
+	public Student(User user) {
+		this.id = user.id;
+		this.email = user.email;
+		this.firstname = user.firstname;
+		this.lastname = user.lastname;
+	}
 
 	public SchoolClass getSchoolClass() {
 		return schoolClass;

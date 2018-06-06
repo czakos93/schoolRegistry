@@ -12,9 +12,10 @@
 		<h3 th:text="#{users.title}"></h3>
 		<h5 th:text="#{users.all}"></h5>
 		<table class="table">
+			<tr><th th:text="#{user.login}"></th><th th:text="#{user.name}"></th></tr>
 			<tr th:each="user : ${users}">
-				<td th:text="#{user.login}+' '+${user.email}"></td>
-				<td th:text="#{user.name}+' '+${user.lastname}+' '+${user.firstname}"></td>
+				<td th:text="${user.email}"></td>
+				<td th:text="${user.lastname}+' '+${user.firstname}"></td>
 				<td><a th:href="@{user/edit(id=${user.id})}" th:text="#{users.edit}"></a></td>
 				<td><a th:href="@{user/remove(id=${user.id})}" th:text="#{users.remove}"></a></td>
 			</tr>

@@ -39,7 +39,7 @@ public class RegistrationController {
 		if (result.hasErrors()) {
 			return "/register";
 		}
-		userService.saveUser(user);		
+		userService.create(user);		
 		return "redirect:/login";
 	}
 }

@@ -20,7 +20,7 @@ import javax.persistence.Transient;
 public class GradesList {
 	
 	@Id
-	@Column(name = "ID")
+	@Column(name = "ID", unique = true, updatable = false)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	

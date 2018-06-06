@@ -22,9 +22,12 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.DynamicUpdate;
+
 @Entity
 @Table(name = "USERS")
 @Inheritance(strategy = InheritanceType.JOINED)
+@DynamicUpdate
 public class User {
 	
 	@Id
@@ -38,7 +41,7 @@ public class User {
 	@Column(name = "LASTNAME")
 	String lastname;
 	
-	@Column(name = "EMAIL", unique = true)
+	@Column(name = "EMAIL", unique = true, updatable = false)
 	String email;
 	
 	@Column(name = "PASSWORD")
