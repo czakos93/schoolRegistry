@@ -1,10 +1,11 @@
 package pl.dawidbronczak.spring.schoolRegistry.domain;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,7 +26,7 @@ public class SchoolClass {
 	private String name;
 	
 	@OneToMany(mappedBy = "schoolClass")
-	private List<Student> students;
+	private List<Student> students = new ArrayList<>();
 
 	public int getId() {
 		return id;
@@ -49,6 +50,11 @@ public class SchoolClass {
 
 	public void setStudents(List<Student> students) {
 		this.students = students;
+	}
+	
+	public void addStudent(Student student) {
+		students.add(student);
+		student.setSchoolClass(this);
 	}
 	
 }

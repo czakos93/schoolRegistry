@@ -38,7 +38,6 @@ public class UserController {
 	
 	@GetMapping("admin/user/edit")
 	public String modifyUser(@RequestParam("id") int userId, Model model, RedirectAttributes redirectAttributes) {		
-		
 		model.addAttribute("user", userService.findById(userId));
 		return "modifyUser.html"; 
 	}

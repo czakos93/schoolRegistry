@@ -1,5 +1,9 @@
 package pl.dawidbronczak.spring.schoolRegistry.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,16 +40,24 @@ public class ClassController {
 	
 	@GetMapping("admin/class/edit")
 	public String editClass(@RequestParam("id") int classId, Model model) {
+		
 		SchoolClass schoolClass = classService.findClassById(classId);
+		List<Student> students = new ArrayList<>();
+		students.addAll(schoolClass.getStudents());
+		students.addAll(studentService.findBySchoolClassIsNull());
 		model.addAttribute("schoolClass", schoolClass);
-		model.addAttribute("studentsList", studentService.findBySchoolClassIsNullOrSchoolClass(schoolClass));
+		model.addAttribute("students", students);
+		
 		return "modifyClass.html";
 	}
+	
 	@PostMapping("admin/class/edit")
 	public String editClassProcces(@ModelAttribute("schoolClass") SchoolClass schoolClass) {
+
 		classService.save(schoolClass);
 		return "redirect:/admin/classes";
 	}
+	
 	@GetMapping("admin/class/add")
 	public String newClass(Model model) {
 		model.addAttribute("schoolClass", new SchoolClass());

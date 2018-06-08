@@ -16,13 +16,13 @@
 		 		<label for="name" th:text="#{schoolClass.name}"></label>
 		 		<input type="text" th:field="*{name}" id="name" class="form-control" th:placeholder="*{name}" />
 		 	</div>
-		 	<div class="form-group" >
+		 	<div>
 		 		<ul>
- 					<li th:each="student : ${studentsList}">
-						<input type="checkbox" th:checked="${schoolClass.students}" th:value="${student}" />
-    					<label  th:text="${student.lastname}"></label>
- 					</li>
-				</ul>
+		 			<li th:each="student : ${students}">
+		 				<label th:text="${student.lastname}" ></label>
+		 				<input type="checkbox"  th:field="*{students}" th:value="${student.id}"/>
+		 			</li>
+		 		</ul>
 		 	</div>
 		 	<input type="submit" class="btn btn-primary float-right " th:value="#{modifyClass.apply}">
 		</form>	

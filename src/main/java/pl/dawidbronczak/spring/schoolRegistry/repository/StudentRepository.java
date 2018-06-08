@@ -1,6 +1,7 @@
 package pl.dawidbronczak.spring.schoolRegistry.repository;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.data.repository.CrudRepository;
 
@@ -11,5 +12,7 @@ public interface StudentRepository extends CrudRepository<Student, Integer> {
 
 	public Student findByEmail(String email);
 	
-	public List<Student> findBySchoolClassIsNullOrSchoolClass(SchoolClass schoolClass);
+	public Set<Student> findBySchoolClassIsNull();
+
+	public Set<Student> findBySchoolClass(SchoolClass schoolClass);
 }

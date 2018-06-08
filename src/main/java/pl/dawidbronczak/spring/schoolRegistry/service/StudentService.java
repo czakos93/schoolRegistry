@@ -1,6 +1,8 @@
 package pl.dawidbronczak.spring.schoolRegistry.service;
 
+import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 import javax.validation.Valid;
 
@@ -18,8 +20,10 @@ public interface StudentService{
 
 	void save(@Valid Student student);
 	
-	List<Student> findBySchoolClassIsNullOrSchoolClass(SchoolClass schoolClass);
-
 	Student findById(int userId);
+
+	Collection<? extends Student> findBySchoolClassIsNull();
+
+	Set<Student> findBySchoolClass(SchoolClass schoolClass);
 	
 }

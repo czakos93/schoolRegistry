@@ -1,55 +1,31 @@
 package pl.dawidbronczak.spring.schoolRegistry.domain;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.HashSet;
 import java.util.Set;
-import java.util.TreeMap;
-
-import javax.persistence.CollectionTable;
-import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.MapKeyColumn;
-import javax.persistence.MapKeyJoinColumn;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
 @Entity
 @Table(name = "STUDENTS")
 public class Student extends User {
-	
-	
+		
 	@ManyToOne
 	@JoinColumn(name = "SCHOOL_CLASS_ID")
 	private SchoolClass schoolClass;
 	
 	
-	@OneToMany(mappedBy = "owner")
-	@MapKeyJoinColumn(name = "SUBJECT_ID")
-	private Map<Subject, GradesList> gradesMap = new TreeMap<Subject, GradesList>();
+	@OneToMany(mappedBy = "student",  orphanRemoval = true)
+	private Set<GradesList> gradesLists = new HashSet<>();
 	
-	public Student(){
-		
-	}
+	@Transient
+	private boolean haveClass;
+	
 
-	public Student(User user) {
-		this.id = user.id;
-		this.email = user.email;
-		this.firstname = user.firstname;
-		this.lastname = user.lastname;
-	}
-
+	
 	public SchoolClass getSchoolClass() {
 		return schoolClass;
 	}
@@ -58,14 +34,20 @@ public class Student extends User {
 		this.schoolClass = schoolClass;
 	}
 
-	public Map<Subject, GradesList> getGradesMap() {
-		return gradesMap;
+	public Set<GradesList> getGradesLists() {
+		return gradesLists;
 	}
 
-	public void setGradesMap(Map<Subject, GradesList> gradesMap) {
-		this.gradesMap = gradesMap;
+	public void setGradesLists(Set<GradesList> gradesLists) {
+		this.gradesLists = gradesLists;
 	}
 
+	public boolean isHaveClass() {
+		return schoolClass != null;
+	}
 
+	public void setHaveClass(boolean haveClass) {
+		this.haveClass = haveClass;
+	}
 
 }

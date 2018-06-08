@@ -1,14 +1,9 @@
 package pl.dawidbronczak.spring.schoolRegistry.domain;
 
-import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
+import java.util.Objects;
 import java.util.Set;
-import java.util.TreeSet;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -16,13 +11,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.NaturalId;
 
 @Entity
 @Table(name = "USERS")
@@ -42,6 +35,7 @@ public class User {
 	String lastname;
 	
 	@Column(name = "EMAIL", unique = true, updatable = false)
+	@NaturalId
 	String email;
 	
 	@Column(name = "PASSWORD")
@@ -98,5 +92,20 @@ public class User {
 		this.roles = roles;
 	}
 	
+	@Override
+	public boolean equals(Object object) {
+        if (this == object) return true;
+        if (!(object instanceof User)) return false;
+        User user = (User) object;
+        return Objects.equals(getEmail(), user.getEmail());
+    }
 	
+	@Override
+	public int hashCode() {
+		 return Objects.hash(getEmail());
+	}
+	
+ 
+
+
 }
