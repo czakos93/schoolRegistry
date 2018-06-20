@@ -1,8 +1,10 @@
 package pl.dawidbronczak.spring.schoolRegistry.controller;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,8 +16,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import pl.dawidbronczak.spring.schoolRegistry.domain.SchoolClass;
 import pl.dawidbronczak.spring.schoolRegistry.domain.Student;
+import pl.dawidbronczak.spring.schoolRegistry.domain.User;
 import pl.dawidbronczak.spring.schoolRegistry.service.SchoolClassService;
 import pl.dawidbronczak.spring.schoolRegistry.service.StudentService;
+import pl.dawidbronczak.spring.schoolRegistry.service.UserService;
 
 @Controller
 public class ClassController {
@@ -39,21 +43,18 @@ public class ClassController {
 	}
 	
 	@GetMapping("admin/class/edit")
-	public String editClass(@RequestParam("id") int classId, Model model) {
-		
+	public String editClass(@RequestParam("id") int classId, Model model) {		
 		SchoolClass schoolClass = classService.findClassById(classId);
-		List<Student> students = new ArrayList<>();
-		students.addAll(schoolClass.getStudents());
+		Set<Student> students = new HashSet<>();
 		students.addAll(studentService.findBySchoolClassIsNull());
+		students.addAll(schoolClass.getStudents());
 		model.addAttribute("schoolClass", schoolClass);
-		model.addAttribute("students", students);
-		
+		model.addAttribute("students", students);		
 		return "modifyClass.html";
 	}
 	
 	@PostMapping("admin/class/edit")
-	public String editClassProcces(@ModelAttribute("schoolClass") SchoolClass schoolClass) {
-
+	public String editClassProcess(@ModelAttribute("schoolClass") SchoolClass schoolClass) {
 		classService.save(schoolClass);
 		return "redirect:/admin/classes";
 	}
@@ -61,6 +62,9 @@ public class ClassController {
 	@GetMapping("admin/class/add")
 	public String newClass(Model model) {
 		model.addAttribute("schoolClass", new SchoolClass());
+		Set<Student> students = new HashSet<>();
+		students.addAll(studentService.findBySchoolClassIsNull());
+		model.addAttribute("students", students);		
 		return "modifyClass.html";
 	}
 }

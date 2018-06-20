@@ -19,7 +19,7 @@
 		 	<div>
 		 		<ul>
 		 			<li th:each="student : ${students}">
-		 				<label th:text="${student.lastname}" ></label>
+		 				<label th:text="${student.owner.lastname}" ></label>
 		 				<input type="checkbox"  th:field="*{students}" th:value="${student.id}"/>
 		 			</li>
 		 		</ul>

@@ -3,6 +3,7 @@ package pl.dawidbronczak.spring.schoolRegistry.domain;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -26,7 +27,7 @@ public class SchoolClass {
 	private String name;
 	
 	@OneToMany(mappedBy = "schoolClass")
-	private List<Student> students = new ArrayList<>();
+	private Set<Student> students = new TreeSet<>();
 
 	public int getId() {
 		return id;
@@ -44,17 +45,14 @@ public class SchoolClass {
 		this.name = name;
 	}
 
-	public List<Student> getStudents() {
+	public Set<Student> getStudents() {
 		return students;
 	}
 
-	public void setStudents(List<Student> students) {
+	public void setStudents(Set<Student> students) {
 		this.students = students;
 	}
 	
-	public void addStudent(Student student) {
-		students.add(student);
-		student.setSchoolClass(this);
-	}
+
 	
 }

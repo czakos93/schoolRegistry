@@ -5,10 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -22,14 +19,6 @@ public class Grade {
 	
 	@Column(name = "GRADE")
 	private float grade;
-	
-	@ManyToOne
-	@JoinColumn(name = "STUDENT_ID")
-	private Student owner;
-	
-	@ManyToOne
-	@JoinColumn(name = "SUBJECT_ID")
-	private Subject subject;
 	
 	@Column(name = "DESCRIPTION")
 	private String description;
@@ -51,22 +40,6 @@ public class Grade {
 
 	public void setGrade(float grade) {
 		this.grade = grade;
-	}
-
-	public Student getOwner() {
-		return owner;
-	}
-
-	public void setOwner(Student owner) {
-		this.owner = owner;
-	}
-
-	public Subject getSubject() {
-		return subject;
-	}
-
-	public void setSubject(Subject subject) {
-		this.subject = subject;
 	}
 
 	public String getDescription() {

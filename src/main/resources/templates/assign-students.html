@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+	<title th:text="#{desktop.title}"></title>
+</head>
+<body>
+<main class="container pt-5" >
+	<div class="starter-template">
+	
+		<form th:object="${allStudentsWrapper}" th:action="@{/admin/users/assign-students}" method="post">
+			<ul>
+				<li th:each="student : ${allStudentsWrapper.list}">
+					<input type="checkbox" th:field="*{list}"  th:value="${student.id}"/>
+					<label th:text="${student.lastname}"></label>
+				</li>
+				<li th:each="user : ${possibleStudents}">
+					<input type="checkbox" th:field="*{list}"  th:value="${user.id}"/>
+					<label th:text="${user.lastname}"></label>
+				</li>
+			</ul>
+
+		<input type="submit" class="btn btn-primary float-right " th:value="#{modifyClass.apply}">
+		</form>	
+		<a class="btn btn-primary float-left" th:href="@{/admin/classes}" th:text="#{classes.back}"></a>
+	</div>
+</main>
+
+</body>
+</html>

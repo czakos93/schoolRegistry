@@ -11,18 +11,16 @@ import javax.persistence.Transient;
 
 @Entity
 @Table(name = "STUDENTS")
-public class Student extends User {
+public class Student extends Function {
 		
 	@ManyToOne
 	@JoinColumn(name = "SCHOOL_CLASS_ID")
 	private SchoolClass schoolClass;
 	
 	
-	@OneToMany(mappedBy = "student",  orphanRemoval = true)
+	@OneToMany(mappedBy = "student")
 	private Set<GradesList> gradesLists = new HashSet<>();
-	
-	@Transient
-	private boolean haveClass;
+
 	
 
 	
@@ -42,12 +40,5 @@ public class Student extends User {
 		this.gradesLists = gradesLists;
 	}
 
-	public boolean isHaveClass() {
-		return schoolClass != null;
-	}
-
-	public void setHaveClass(boolean haveClass) {
-		this.haveClass = haveClass;
-	}
 
 }

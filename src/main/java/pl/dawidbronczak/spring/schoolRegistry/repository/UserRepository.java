@@ -1,17 +1,25 @@
 package pl.dawidbronczak.spring.schoolRegistry.repository;
 
+import java.util.List;
+import java.util.Set;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import pl.dawidbronczak.spring.schoolRegistry.domain.User;
 
-public interface UserRepository extends JpaRepository<User, Integer> {
+public interface UserRepository extends CrudRepository<User, Integer> {
 
 	public User findByEmail(String email);
+
+	public Set<User> findByFunctionIsNull();
 	
-	@Query(value = "DELETE FROM users_roles WHERE user_id = ?1", nativeQuery = true)
-	public void removeUserfromUsers_Roles(int userId);
+	@Query("select u from User u where u.function in(select t from Teacher t)")
+	public Set<User> findByTeacherFunction();
+
+	@Query("select u from User u where u.function in(select s from Student s)")
+	public Set<User> findByStudentFunction();
 	
 
 }

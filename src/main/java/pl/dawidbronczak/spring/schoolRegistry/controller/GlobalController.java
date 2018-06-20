@@ -7,18 +7,20 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import pl.dawidbronczak.spring.schoolRegistry.domain.Student;
+import pl.dawidbronczak.spring.schoolRegistry.domain.User;
 import pl.dawidbronczak.spring.schoolRegistry.service.StudentService;
+import pl.dawidbronczak.spring.schoolRegistry.service.UserService;
 
 @ControllerAdvice(assignableTypes={AdminController.class,ClassController.class,DesktopController.class,GradeController.class,SubjectController.class})
 public class GlobalController {
 	
 	@Autowired
-	StudentService studentService; 
+	UserService userService; 
 	
 	@ModelAttribute("loggedUser")
-	public Student getLoggedUser(Principal principal){
+	public User getLoggedUser(Principal principal){
 		
-			return studentService.findByEmail(principal.getName());
+			return userService.findByEmail(principal.getName());
 		
 
 			

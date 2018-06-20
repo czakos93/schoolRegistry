@@ -10,16 +10,18 @@
 <main class="container pt-5" >
 	<div class="starter-template">
 		<h3 th:text="#{users.title}"></h3>
-		<h5 th:text="#{users.all}"></h5>
+		<h5 th:text="#{users.all}" class="pt-4 pb-2"></h5>
 		<table class="table">
-			<tr><th th:text="#{user.login}"></th><th th:text="#{user.name}"></th></tr>
+			<tr><th th:text="#{users.table.column.id}"></th><th th:text="#{user.login}"></th><th th:text="#{user.name}"></th><th>Operacje</th></tr>
 			<tr th:each="user : ${users}">
+				<td th:text="${user.id}"></td>
 				<td th:text="${user.email}"></td>
 				<td th:text="${user.lastname}+' '+${user.firstname}"></td>
-				<td><a th:href="@{user/edit(id=${user.id})}" th:text="#{users.edit}"></a></td>
-				<td><a th:href="@{user/remove(id=${user.id})}" th:text="#{users.remove}"></a></td>
+				<td><a th:href="@{user/edit(id=${user.id})}" th:text="#{users.edit}"></a>
+				<a th:href="@{user/remove(id=${user.id})}" th:text="#{users.remove}"></a></td>
 			</tr>
 		</table>
+				<a class="btn btn-primary float-left" th:href="@{/admin}" th:text="#{classes.back}"></a>
 	</div>
 </main>
 

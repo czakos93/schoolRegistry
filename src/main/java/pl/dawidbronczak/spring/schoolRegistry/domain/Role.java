@@ -1,6 +1,6 @@
 package pl.dawidbronczak.spring.schoolRegistry.domain;
 
-import java.util.List;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -24,7 +24,7 @@ public class Role {
 	private String roleName;
 	
 	@ManyToMany(mappedBy = "roles")
-	private Set<User> users;
+	private Set<User> users = new HashSet<>();
 
 	public int getId() {
 		return id;

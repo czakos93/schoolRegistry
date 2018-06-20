@@ -27,10 +27,7 @@ public class StudentServiceImpl implements StudentService {
 	@Autowired
 	RoleService roleService;
 	
-	@Override
-	public Student findByEmail(String email) {
-		return studentRepository.findByEmail(email);
-	}
+
 
 	@Override
 	public boolean isExist(int studentId) {
@@ -39,10 +36,7 @@ public class StudentServiceImpl implements StudentService {
 
 	@Override
 	public void save(@Valid Student student) {
-		Role role = roleService.findByRoleName("ROLE_STUDENT");
-		Set<Role> roles = student.getRoles();
-		roles.add(role);
-		student.setRoles(roles);
+		
 		studentRepository.save(student);	
 	}
 
@@ -59,6 +53,12 @@ public class StudentServiceImpl implements StudentService {
 	@Override
 	public Set<Student> findBySchoolClass(SchoolClass schoolClass) {
 		return studentRepository.findBySchoolClass(schoolClass);
+	}
+
+	@Override
+	public void delete(Student student) {
+		studentRepository.delete(student);
+		
 	}
 
 }

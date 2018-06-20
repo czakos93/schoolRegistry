@@ -14,7 +14,6 @@ import pl.dawidbronczak.spring.schoolRegistry.domain.User;
 
 public interface StudentService{
 
-	Student findByEmail(String email);
 
 	boolean isExist(int studentId);
 
@@ -22,8 +21,10 @@ public interface StudentService{
 	
 	Student findById(int userId);
 
-	Collection<? extends Student> findBySchoolClassIsNull();
+	Set<Student> findBySchoolClassIsNull();
 
 	Set<Student> findBySchoolClass(SchoolClass schoolClass);
+
+	void delete(Student student);
 	
 }

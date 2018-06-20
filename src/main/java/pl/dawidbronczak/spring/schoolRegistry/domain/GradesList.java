@@ -1,15 +1,13 @@
 package pl.dawidbronczak.spring.schoolRegistry.domain;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
@@ -25,11 +23,15 @@ public class GradesList {
 	private int id;
 	
 	@OneToMany(mappedBy = "gradeList")
-	private List<Grade> grades = new ArrayList<Grade>();
+	private Set<Grade> grades = new HashSet<>();
 	
 	@ManyToOne
-	@JoinColumn(name = "OWNER_ID")
-	private Student owner;
+	@JoinColumn(name = "student_id")
+	private Student student;
+	
+	@ManyToOne
+	@JoinColumn(name = "subject_id")
+	private Subject subject;
 	
 	@Transient
 	private float average;
@@ -41,14 +43,6 @@ public class GradesList {
 	public void setId(int id) {
 		this.id = id;
 	}
-
-	public List<Grade> getGrades() {
-		return grades;
-	}
-
-	public void setGrades(List<Grade> grades) {
-		this.grades = grades;
-	}
 	
 	public float getAverage() {
 		float sum = 0;
@@ -57,6 +51,22 @@ public class GradesList {
 		}
 		average = sum/grades.size();
 		return average;
+	}
+
+	public Set<Grade> getGrades() {
+		return grades;
+	}
+
+	public void setGrades(Set<Grade> grades) {
+		this.grades = grades;
+	}
+
+	public Student getStudent() {
+		return student;
+	}
+
+	public void setStudent(Student student) {
+		this.student = student;
 	}
 
 

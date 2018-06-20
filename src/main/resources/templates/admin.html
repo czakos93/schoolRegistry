@@ -13,10 +13,16 @@
 		<p th:text="#{admin.userTab}"></p>
 		<ul>
 			<li><a th:href="@{/admin/users}" th:text="#{admin.userTab.manageUsers}"></a></li>
+			<li><a th:href="@{/admin/users/assign-teachers}" th:text="#{admin.assign-teachers}"></a></li>
+			<li><a th:href="@{/admin/users/assign-students}" th:text="#{admin.assign-students}"></a></li>
 		</ul>
 		<p th:text="#{admin.ClassTab}"></p>
 		<ul>
 			<li><a th:href="@{/admin/classes}" th:text="#{admin.classTab.manageClasses}"></a></li>
+		</ul>
+		<p th:text="#{admin.subjectTab}"></p>
+		<ul>
+			<li><a th:href="@{/admin/subjects}" th:text="#{admin.subjectTab.manageSubject}"></a></li>
 		</ul>
 	</div>
 </main>

@@ -1,19 +1,19 @@
 package pl.dawidbronczak.spring.schoolRegistry.controller;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 
-import pl.dawidbronczak.spring.schoolRegistry.domain.Student;
+import org.springframework.web.bind.annotation.GetMapping;
+
+
+
 import pl.dawidbronczak.spring.schoolRegistry.service.SchoolClassService;
-import pl.dawidbronczak.spring.schoolRegistry.service.StudentService;
+
+import pl.dawidbronczak.spring.schoolRegistry.service.SubjectService;
+
 import pl.dawidbronczak.spring.schoolRegistry.service.UserService;
+
 	
 
 
@@ -21,7 +21,7 @@ import pl.dawidbronczak.spring.schoolRegistry.service.UserService;
 public class AdminController {
 	
 	@Autowired
-	private StudentService studentService;
+	private SubjectService subjectService;
 	
 	@Autowired
 	private SchoolClassService classService;
@@ -32,8 +32,7 @@ public class AdminController {
 	@GetMapping("/admin")
 	public String showAdminPage() {
 		return "admin.html";
-	}
-	
+	}	
 	
 	@GetMapping("admin/classes")
 	public String manageClasses(Model model) {
@@ -46,5 +45,16 @@ public class AdminController {
 		model.addAttribute("users", userService.findAll());
 		return "users.html";
 	}
+	
+	@GetMapping("admin/subjects")
+	public String manageSubjects(Model model) {
+		model.addAttribute("subjects", subjectService.findAll());
+		return "subjects.html";
+	}
+	
+
+	
+	
+	
 	
 }

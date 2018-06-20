@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import pl.dawidbronczak.spring.schoolRegistry.domain.SchoolClass;
 import pl.dawidbronczak.spring.schoolRegistry.domain.Student;
+import pl.dawidbronczak.spring.schoolRegistry.domain.User;
 import pl.dawidbronczak.spring.schoolRegistry.repository.SchoolClassRepository;
 import pl.dawidbronczak.spring.schoolRegistry.service.SchoolClassService;
 import pl.dawidbronczak.spring.schoolRegistry.service.StudentService;
@@ -34,25 +35,33 @@ public class SchoolClassServiceImpl implements SchoolClassService {
 
 	@Override
 	public void remove(int classId) {
-		schoolClassRepository.deleteById(classId);
-		
+		SchoolClass schoolClass = findClassById(classId);
+		if(!schoolClass.getStudents().isEmpty()) {
+			for(Student student : schoolClass.getStudents()) {
+				student.setSchoolClass(null);
+			}
+		}
+		schoolClassRepository.deleteById(classId);		
 	}
 
 	@Override
 	public void save(SchoolClass schoolClass) {
+		schoolClassRepository.save(schoolClass);
 		Set<Student> currentStudents = studentService.findBySchoolClass(schoolClass);
-		List<Student> updatedStudents = schoolClass.getStudents();
+		Set<Student> updatedStudents = schoolClass.getStudents();
+		
 		for(Student currentStudent : currentStudents) {
 			if(!updatedStudents.contains(currentStudent)) {
 				currentStudent.setSchoolClass(null);
+				studentService.save(currentStudent);
 			}
 		}
 		for(Student updatedStudent : updatedStudents) {
 			if(!currentStudents.contains(updatedStudent)) {
 				updatedStudent.setSchoolClass(schoolClass);
+				studentService.save(updatedStudent);
 			}
 		}
-		schoolClassRepository.save(schoolClass);
 		
 	}
 

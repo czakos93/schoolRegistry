@@ -1,5 +1,8 @@
 package pl.dawidbronczak.spring.schoolRegistry.service.implementation;
 
+import java.util.List;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +21,28 @@ public class SubjectServiceImpl implements SubjectService {
 		
 		return subjectRepository.findById(id).get();
 		
+	}
+
+	@Override
+	public void create(Subject subject) {
+
+		subjectRepository.save(subject);
+		
+	}
+
+	@Override
+	public void save(Subject subject) {
+		subjectRepository.save(subject);		
+	}
+
+	@Override
+	public List<Subject> findAll() {
+		return (List<Subject>) subjectRepository.findAll();
+	}
+
+	@Override
+	public void remove(int id) {
+		subjectRepository.deleteById(id);		
 	}
 
 }

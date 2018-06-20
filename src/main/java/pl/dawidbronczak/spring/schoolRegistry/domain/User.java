@@ -11,38 +11,48 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinTable;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.TableGenerator;
 
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.NaturalId;
 
 @Entity
 @Table(name = "USERS")
-@Inheritance(strategy = InheritanceType.JOINED)
-@DynamicUpdate
 public class User {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID", unique = true, updatable = false)
-	int id;
+	private int id;
+	
+	@OneToOne(orphanRemoval = true)
+	@JoinColumn(name = "FUNCTION_ID")
+	private Function function;
+	
 	
 	@Column(name = "FIRSTNAME")
-	String firstname;
+	private String firstname;
 	
 	@Column(name = "LASTNAME")
-	String lastname;
+	private String lastname;
 	
 	@Column(name = "EMAIL", unique = true, updatable = false)
 	@NaturalId
-	String email;
+	private String email;
 	
 	@Column(name = "PASSWORD")
-	String password;
+	private String password;
 	
 	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "USERS_ROLES", joinColumns = @JoinColumn(name = "USER_ID"), inverseJoinColumns = @JoinColumn(name = "ROLE_ID"))
 	private Set<Role> roles = new HashSet<Role>();
+
+
 
 	public int getId() {
 		return id;
@@ -92,18 +102,47 @@ public class User {
 		this.roles = roles;
 	}
 	
-	@Override
-	public boolean equals(Object object) {
-        if (this == object) return true;
-        if (!(object instanceof User)) return false;
-        User user = (User) object;
-        return Objects.equals(getEmail(), user.getEmail());
-    }
-	
+
+
+	public Function getFunction() {
+		return function;
+	}
+
+	public void setFunction(Function function) {
+		this.function = function;
+	}
+
 	@Override
 	public int hashCode() {
-		 return Objects.hash(getEmail());
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		return result;
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (!(obj instanceof User)) {
+			return false;
+		}
+		User other = (User) obj;
+		if (email == null) {
+			if (other.email != null) {
+				return false;
+			}
+		} else if (!email.equals(other.email)) {
+			return false;
+		}
+		return true;
+	}
+
+
 	
  
 
