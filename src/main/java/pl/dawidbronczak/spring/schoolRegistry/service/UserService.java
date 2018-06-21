@@ -1,7 +1,5 @@
 package pl.dawidbronczak.spring.schoolRegistry.service;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
@@ -12,7 +10,7 @@ public interface UserService {
 	public boolean isExist(User user);
 	public void create(User user);
 	public User findByEmail(String email);
-	public List<User> findAll();
+	public Iterable<User> findAll();
 	public void remove(int userId);
 	public User findById(int userId);
 	public void save(User user);

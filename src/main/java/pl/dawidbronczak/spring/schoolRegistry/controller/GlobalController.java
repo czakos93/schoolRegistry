@@ -6,9 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
-import pl.dawidbronczak.spring.schoolRegistry.domain.Student;
 import pl.dawidbronczak.spring.schoolRegistry.domain.User;
-import pl.dawidbronczak.spring.schoolRegistry.service.StudentService;
 import pl.dawidbronczak.spring.schoolRegistry.service.UserService;
 
 @ControllerAdvice(assignableTypes={AdminController.class,ClassController.class,DesktopController.class,GradeController.class,SubjectController.class})

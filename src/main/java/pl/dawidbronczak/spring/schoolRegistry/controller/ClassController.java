@@ -1,10 +1,9 @@
 package pl.dawidbronczak.spring.schoolRegistry.controller;
 
-import java.util.ArrayList;
+
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
-import java.util.TreeSet;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,10 +15,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import pl.dawidbronczak.spring.schoolRegistry.domain.SchoolClass;
 import pl.dawidbronczak.spring.schoolRegistry.domain.Student;
-import pl.dawidbronczak.spring.schoolRegistry.domain.User;
 import pl.dawidbronczak.spring.schoolRegistry.service.SchoolClassService;
 import pl.dawidbronczak.spring.schoolRegistry.service.StudentService;
-import pl.dawidbronczak.spring.schoolRegistry.service.UserService;
+
 
 @Controller
 public class ClassController {

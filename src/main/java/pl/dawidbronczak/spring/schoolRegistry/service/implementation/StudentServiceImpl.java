@@ -1,6 +1,5 @@
 package pl.dawidbronczak.spring.schoolRegistry.service.implementation;
 
-import java.util.List;
 import java.util.Set;
 
 import javax.validation.Valid;
@@ -9,14 +8,11 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import pl.dawidbronczak.spring.schoolRegistry.domain.Role;
 import pl.dawidbronczak.spring.schoolRegistry.domain.SchoolClass;
 import pl.dawidbronczak.spring.schoolRegistry.domain.Student;
-import pl.dawidbronczak.spring.schoolRegistry.domain.User;
 import pl.dawidbronczak.spring.schoolRegistry.repository.StudentRepository;
 import pl.dawidbronczak.spring.schoolRegistry.service.RoleService;
 import pl.dawidbronczak.spring.schoolRegistry.service.StudentService;
-import pl.dawidbronczak.spring.schoolRegistry.service.UserService;
 
 @Service
 public class StudentServiceImpl implements StudentService {

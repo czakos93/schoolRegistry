@@ -1,16 +1,12 @@
 package pl.dawidbronczak.spring.schoolRegistry.service.implementation;
 
-import java.util.List;
-import java.util.Set;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import pl.dawidbronczak.spring.schoolRegistry.domain.Function;
 import pl.dawidbronczak.spring.schoolRegistry.domain.Subject;
 import pl.dawidbronczak.spring.schoolRegistry.domain.Teacher;
-import pl.dawidbronczak.spring.schoolRegistry.domain.User;
 import pl.dawidbronczak.spring.schoolRegistry.repository.TeacherRepository;
 import pl.dawidbronczak.spring.schoolRegistry.service.RoleService;
 import pl.dawidbronczak.spring.schoolRegistry.service.TeacherService;
@@ -23,6 +19,7 @@ public class TeacherServiceImpl implements TeacherService {
 	
 	@Autowired
 	RoleService roleService;
+
 	
 	@Autowired
 	ModelMapper modelMapper;
@@ -38,8 +35,8 @@ public class TeacherServiceImpl implements TeacherService {
 	}
 
 	@Override
-	public List<Teacher> findAll() {
-		return (List<Teacher>) teacherRepository.findAll();
+	public Iterable<Teacher> findAll() {
+		return teacherRepository.findAll();
 	}
 
 	

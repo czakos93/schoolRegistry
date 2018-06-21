@@ -1,7 +1,5 @@
 package pl.dawidbronczak.spring.schoolRegistry.domain;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 

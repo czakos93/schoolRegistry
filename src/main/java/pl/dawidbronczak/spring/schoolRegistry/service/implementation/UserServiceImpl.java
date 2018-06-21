@@ -1,15 +1,10 @@
 package pl.dawidbronczak.spring.schoolRegistry.service.implementation;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
 import org.modelmapper.ModelMapper;
-import org.modelmapper.PropertyMap;
-import org.modelmapper.TypeMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -21,7 +16,6 @@ import pl.dawidbronczak.spring.schoolRegistry.domain.Student;
 import pl.dawidbronczak.spring.schoolRegistry.domain.Teacher;
 import pl.dawidbronczak.spring.schoolRegistry.domain.User;
 import pl.dawidbronczak.spring.schoolRegistry.repository.UserRepository;
-import pl.dawidbronczak.spring.schoolRegistry.service.FunctionService;
 import pl.dawidbronczak.spring.schoolRegistry.service.RoleService;
 import pl.dawidbronczak.spring.schoolRegistry.service.StudentService;
 import pl.dawidbronczak.spring.schoolRegistry.service.TeacherService;
@@ -49,9 +43,6 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	BCryptPasswordEncoder passwordEncoder;
 
-	@Autowired
-	private FunctionService functionService;
-	
 	@Override
 	public boolean isExist(User user){
 		if(userRepository.findByEmail(user.getEmail()) != null) {
@@ -74,8 +65,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public List<User> findAll() {
-		return (java.util.List<User>) userRepository.findAll();
+	public Iterable<User> findAll() {
+		return userRepository.findAll();
 	}
 
 	@Override
@@ -111,6 +102,7 @@ public class UserServiceImpl implements UserService {
 				Teacher teacher = new Teacher();
 				teacherService.save(teacher);
 				updatedTeacher.setFunction(teacher);
+				updatedTeacher.getRoles().add(roleService.findByRoleName("ROLE_TEACHER"));
 				userRepository.save(updatedTeacher);
 			}
 		}
@@ -118,7 +110,8 @@ public class UserServiceImpl implements UserService {
 			if(!updatedTeachers.contains(currentTeacher)) {
 				Teacher teacher = (Teacher) currentTeacher.getFunction();
 				currentTeacher.setFunction(null);
-				teacherService.delete(teacher);				
+				teacherService.delete(teacher);		
+				currentTeacher.getRoles().remove(roleService.findByRoleName("ROLE_TEACHER"));
 				userRepository.save(currentTeacher);
 			}
 		}
@@ -142,6 +135,7 @@ public class UserServiceImpl implements UserService {
 				Student student = new Student();
 				studentService.save(student);
 				updatedStudent.setFunction(student);
+				updatedStudent.getRoles().add(roleService.findByRoleName("ROLE_STUDENT"));
 				userRepository.save(updatedStudent);
 			}
 		}
@@ -149,7 +143,8 @@ public class UserServiceImpl implements UserService {
 			if(!updatedStudents.contains(currentStudent)) {
 				Student student = (Student) currentStudent.getFunction();
 				currentStudent.setFunction(null);
-				studentService.delete(student);				
+				studentService.delete(student);	
+				currentStudent.getRoles().remove(roleService.findByRoleName("ROLE_STUDENT"));
 				userRepository.save(currentStudent);
 			}
 		}

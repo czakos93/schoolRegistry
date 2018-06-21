@@ -1,11 +1,6 @@
 package pl.dawidbronczak.spring.schoolRegistry.service;
 
-import java.util.List;
-import java.util.Set;
-
-import pl.dawidbronczak.spring.schoolRegistry.domain.Function;
 import pl.dawidbronczak.spring.schoolRegistry.domain.Teacher;
-import pl.dawidbronczak.spring.schoolRegistry.domain.User;
 
 
 public interface TeacherService {
@@ -14,7 +9,7 @@ public interface TeacherService {
 
 	Teacher findById(int userId);
 
-	List<Teacher> findAll();
+	Iterable<Teacher> findAll();
 
 	void save(Teacher teacher);
 

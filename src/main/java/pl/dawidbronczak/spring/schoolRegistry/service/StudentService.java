@@ -1,16 +1,11 @@
 package pl.dawidbronczak.spring.schoolRegistry.service;
 
-import java.util.Collection;
-import java.util.List;
 import java.util.Set;
 
 import javax.validation.Valid;
 
-import org.springframework.data.repository.CrudRepository;
-
 import pl.dawidbronczak.spring.schoolRegistry.domain.SchoolClass;
 import pl.dawidbronczak.spring.schoolRegistry.domain.Student;
-import pl.dawidbronczak.spring.schoolRegistry.domain.User;
 
 public interface StudentService{
 

@@ -1,7 +1,5 @@
 package pl.dawidbronczak.spring.schoolRegistry.service.implementation;
 
-import java.util.List;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,8 +34,8 @@ public class SubjectServiceImpl implements SubjectService {
 	}
 
 	@Override
-	public List<Subject> findAll() {
-		return (List<Subject>) subjectRepository.findAll();
+	public Iterable<Subject> findAll() {
+		return  subjectRepository.findAll();
 	}
 
 	@Override

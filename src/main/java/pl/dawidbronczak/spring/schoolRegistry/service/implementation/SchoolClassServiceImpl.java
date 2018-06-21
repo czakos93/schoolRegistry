@@ -1,7 +1,5 @@
 package pl.dawidbronczak.spring.schoolRegistry.service.implementation;
 
-import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import pl.dawidbronczak.spring.schoolRegistry.domain.SchoolClass;
 import pl.dawidbronczak.spring.schoolRegistry.domain.Student;
-import pl.dawidbronczak.spring.schoolRegistry.domain.User;
 import pl.dawidbronczak.spring.schoolRegistry.repository.SchoolClassRepository;
 import pl.dawidbronczak.spring.schoolRegistry.service.SchoolClassService;
 import pl.dawidbronczak.spring.schoolRegistry.service.StudentService;
@@ -29,8 +26,8 @@ public class SchoolClassServiceImpl implements SchoolClassService {
 	}
 
 	@Override
-	public List<SchoolClass> findAll() {
-		return (List<SchoolClass>) schoolClassRepository.findAll();
+	public Iterable<SchoolClass> findAll() {
+		return schoolClassRepository.findAll();
 	}
 
 	@Override
