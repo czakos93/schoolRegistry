@@ -3,28 +3,31 @@
 	xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
-	<title th:text="#{desktop.title}"></title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+	<link th:replace="fragments/footer :: css">
+	<title th:text="#{title.admin_panel}"></title>
 </head>
 <body>
-<main class="container pt-5" >
+<header th:replace="fragments/header :: header"></header>
+<main  role="main" class="container">	
 	<div class="starter-template">
-		<h3 th:text="#{admin.adminpanel}"></h3>
-		<p th:text="#{admin.userTab}"></p>
-		<ul>
-			<li><a th:href="@{/admin/users}" th:text="#{admin.userTab.manageUsers}"></a></li>
-			<li><a th:href="@{/admin/users/assign-teachers}" th:text="#{admin.assign-teachers}"></a></li>
-			<li><a th:href="@{/admin/users/assign-students}" th:text="#{admin.assign-students}"></a></li>
+		<h3 th:text="#{title.admin_panel}"></h3>
+		<p th:text="#{view.users}"></p>
+		<ul class="list-group d-inline-flex pb-3 ">
+			<li class="list-group-item"><a th:href="@{/admin/users}" th:text="#{view.list.manage_users}"></a></li>
+			<li class="list-group-item"><a th:href="@{/admin/users/assign-teachers}" th:text="#{view.list.assign_teachers}"></a></li>
+			<li class="list-group-item"><a th:href="@{/admin/users/assign-students}" th:text="#{view.list.assign_students}"></a></li>
 		</ul>
-		<p th:text="#{admin.ClassTab}"></p>
-		<ul>
-			<li><a th:href="@{/admin/classes}" th:text="#{admin.classTab.manageClasses}"></a></li>
+		<p th:text="#{view.classes}"></p>
+		<ul class="list-group d-inline-flex pb-3">
+			<li class="list-group-item"><a th:href="@{/admin/classes}" th:text="#{view.list.manage_classes}"></a></li>
 		</ul>
-		<p th:text="#{admin.subjectTab}"></p>
-		<ul>
-			<li><a th:href="@{/admin/subjects}" th:text="#{admin.subjectTab.manageSubject}"></a></li>
+		<p th:text="#{view.subjects}"></p>
+		<ul class="list-group d-inline-flex pb-3">
+			<li class="list-group-item"><a th:href="@{/admin/subjects}" th:text="#{view.list.manage_subjects}"></a></li>
 		</ul>
 	</div>
 </main>
+<footer th:replace="fragments/footer :: footer"></footer>
 </body>
 </html>
