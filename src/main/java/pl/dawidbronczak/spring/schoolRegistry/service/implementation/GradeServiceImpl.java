@@ -17,6 +17,12 @@ public class GradeServiceImpl implements GradeService {
 	public Grade findGradeById(int id) {
 		return gradeRepository.findById(id).get();
 	}
+
+	@Override
+	public void save(Grade grade) {
+		gradeRepository.save(grade);
+		
+	}
 	
 
 

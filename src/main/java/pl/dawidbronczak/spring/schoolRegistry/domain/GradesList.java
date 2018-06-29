@@ -22,7 +22,7 @@ public class GradesList {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@OneToMany(mappedBy = "gradeList")
+	@OneToMany(mappedBy = "gradesList")
 	private Set<Grade> grades = new HashSet<>();
 	
 	@ManyToOne
@@ -47,7 +47,7 @@ public class GradesList {
 	public float getAverage() {
 		float sum = 0;
 		for(Grade grade : grades){
-			 sum += grade.getGrade();			 
+			 sum += grade.getGradeValue();			 
 		}
 		average = sum/grades.size();
 		return average;
@@ -60,6 +60,10 @@ public class GradesList {
 	public void setGrades(Set<Grade> grades) {
 		this.grades = grades;
 	}
+	
+	public void addGrade(Grade grade) {
+		getGrades().add(grade);
+	}
 
 	public Student getStudent() {
 		return student;
@@ -67,6 +71,14 @@ public class GradesList {
 
 	public void setStudent(Student student) {
 		this.student = student;
+	}
+
+	public Subject getSubject() {
+		return subject;
+	}
+
+	public void setSubject(Subject subject) {
+		this.subject = subject;
 	}
 
 

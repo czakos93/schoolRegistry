@@ -6,7 +6,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import pl.dawidbronczak.spring.schoolRegistry.domain.Teacher;
+import pl.dawidbronczak.spring.schoolRegistry.domain.User;
+import pl.dawidbronczak.spring.schoolRegistry.dto.PreAddGradeForm;
 import pl.dawidbronczak.spring.schoolRegistry.service.GradeService;
+import pl.dawidbronczak.spring.schoolRegistry.service.SchoolClassService;
 import pl.dawidbronczak.spring.schoolRegistry.service.StudentService;
 import pl.dawidbronczak.spring.schoolRegistry.service.UserService;
 
@@ -22,6 +26,9 @@ public class DesktopController {
 	@Autowired
 	GradeService gradeService;
 	
+	@Autowired
+	SchoolClassService classService;
+	
 	@GetMapping(value={"/","/desktop"})
 	public String showDesktop(Model model, Principal principal){
 
@@ -35,7 +42,12 @@ public class DesktopController {
 	
 
 	@GetMapping("/teacher-desktop")
-	public String showTeacherPage(){
+	public String showTeacherPage(Model model, Principal principal){
+		User user = userService.findByEmail(principal.getName());
+		Teacher teacher = (Teacher) user.getFunction();
+		model.addAttribute("preAddGradeForm", new PreAddGradeForm());
+		model.addAttribute("teacher", teacher);
+		model.addAttribute("classes", classService.findAll());
 		return "teacherDesktop.html";
 	}
 }

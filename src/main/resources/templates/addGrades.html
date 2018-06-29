@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+	<link th:replace="fragments/footer :: css">
+	<title th:text="#{title.add_grades}"></title>
+</head>
+<body>
+<header th:replace="fragments/header :: header"></header>
+<main  role="main" class="container">	
+	<div class="starter-template">
+		<h3 th:text="#{title.add_grades}"></h3>
+		<h5 th:text="#{view.students}" class="pt-4 pb-2"></h5>
+		<table class="table">
+	 	<tr><th th:text="#{table.id}"></th><th th:text="#{table.name}"></th><th th:text="#{table.grades}"><th th:text="#{table.add_grade}"></th></tr>
+	 	<tr th:each="student : ${class.students}">
+	 		<td th:text="${student.owner.id}"></td>
+	 		<td th:text="${student.owner.lastname}+' '+${student.owner.firstname}"></td>
+	 		<td ><th:block th:each="gradesList : ${student.gradesLists}"><th:block th:if="${#numbers.formatInteger(param.subjectID,1)} eq ${#numbers.formatInteger(gradesList.subject.id,1)}"><th:block th:each="grade : ${gradesList.grades}"><a th:href="@{/grade(id=${grade.id})}" th:text="${grade.gradeValue}" class="d-inline pl-1"></a></th:block></th:block></th:block></td>
+	 		<td>
+	 			<form class="form-inline" method="post" th:action="@{/addGradesProcess(studentID=${student.id},subjectID=${param.subjectID})}" th:object="${grade}">
+	 				<input type="number" step="0.5" min=1 max=5 th:field="*{gradeValue}" class="mr-1 form-control form-control-sm col-auto">
+	 				<input type="text" th:field="*{description}" th:placeholder="#{input.description}" class="mr-1 form-control form-control-sm col-auto">
+	 				<button type="submit" th:text="#{button.add}" class="btn btn-sm btn-primary"></button>
+	 	 		</form>
+		 	</td>
+	 	</tr>
+	 </table>
+	 <a class="btn btn-primary float-left" th:href="@{/teacher-desktop}" th:text="#{button.back}"></a>
+	</div>
+</main>
+<footer th:replace="fragments/footer :: footer"></footer>
+</body>
+</html>

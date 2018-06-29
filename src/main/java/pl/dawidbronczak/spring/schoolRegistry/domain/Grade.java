@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -18,13 +19,15 @@ public class Grade {
 	private int id;
 	
 	@Column(name = "GRADE")
-	private float grade;
+	private float gradeValue;
 	
 	@Column(name = "DESCRIPTION")
 	private String description;
+
 	
 	@ManyToOne
-	private GradesList gradeList;
+	@JoinColumn(name = "GRADES_LIST_ID")
+	private GradesList gradesList;
 
 	public int getId() {
 		return id;
@@ -34,12 +37,12 @@ public class Grade {
 		this.id = id;
 	}
 
-	public float getGrade() {
-		return grade;
+	public float getGradeValue() {
+		return gradeValue;
 	}
 
-	public void setGrade(float grade) {
-		this.grade = grade;
+	public void setGradeValue(float gradeValue) {
+		this.gradeValue = gradeValue;
 	}
 
 	public String getDescription() {
@@ -50,13 +53,15 @@ public class Grade {
 		this.description = description;
 	}
 
-	public GradesList getGradeList() {
-		return gradeList;
+	public GradesList getGradesList() {
+		return gradesList;
 	}
 
-	public void setGradeList(GradesList gradeList) {
-		this.gradeList = gradeList;
+	public void setGradesList(GradesList gradesList) {
+		this.gradesList = gradesList;
 	}
+
+
 	
 	
 
