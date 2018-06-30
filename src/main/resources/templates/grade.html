@@ -4,35 +4,23 @@
 <head>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
-	<title th:text="#{grade.title}"></title>
+	<link th:replace="fragments/footer :: css">
+	<title th:text="#{title.grade}"></title>
 </head>
 <body>
-<header>
-	<nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
-		<div class="collapse navbar-collapse">
-			<ul class="navbar-nav mr-auto">
-				<li class="nav-item btn text-light"><a th:href="@{/desktop}" th:text="#{desktop.title}"> </a></li>
-				<li class="nav-item btn text-light"><a th:href="@{/class(id=${loggedUser.schoolClass.id})}" th:text="#{desktop.schoolClass}"> </a></li>
-			</ul>
-			<form class="form-inline mt-2 mt-md-0 " method="POST" th:action="@{/logout}">
-				<label class="mr-3 text-light" th:text="${loggedUser.firstname}+' '+${loggedUser.lastname}"></label>
-				<input  class="btn btn-primary btn-sm" type="submit" th:value="#{submit.logout}"/>
-       			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>	
-			</form>
-		</div>
-	</nav>
-</header>
-	 <main role="main" class="container pt-5">
-		<div class="starter-template">
-			<h3 th:text="#{grade.gradeValue}+' '+${grade.grade}"></h3>
-			<table class="table">
-				<tr><td th:text="#{grade.teacher}"></td><td th:text="${grade.subject.leadTeacher.lastname}+' '+${grade.subject.leadTeacher.firstname}"></td></tr>
-				<tr><td th:text="#{grade.description}"></td><td th:text="${grade.description}"></td></tr>
-				<tr><td th:text="#{grade.owner}"></td><td th:text="${grade.owner.lastname}+' '+${grade.owner.firstname}"></td></tr>
-				<tr><td th:text="#{grade.subject}"></td><td th:text="${grade.subject.name}"></td></tr>
-			</table>
-		</div>
-	</main>
-
+<header th:replace="fragments/header :: header"></header>
+<main role="main" class="container">
+	<div class="starter-template">
+		<h3 th:text="#{title.grade}+' '+${grade.gradeValue}"></h3>
+		<table class="table">
+			<tr><th th:text="#{table.teacher}"></th><td th:text="${grade.gradesList.subject.leadTeacher.owner.lastname}+' '+${grade.gradesList.subject.leadTeacher.owner.firstname}"></td></tr>
+			<tr><th th:text="#{table.description}"></th><td th:text="${grade.description}"></td></tr>
+			<tr><th th:text="#{table.owner}"></th><td th:text="${grade.gradesList.student.owner.lastname}+' '+${grade.gradesList.student.owner.lastname}"></td></tr>
+			<tr><th th:text="#{table.subject}"></th><td th:text="${grade.gradesList.subject.name}"></td></tr>
+		</table>
+	</div>
+	<a th:href="@{/desktop}" th:text="#{button.back}" class="btn btn-primary"></a>
+</main>
+<footer th:replace="fragments/footer :: footer"></footer>
 </body>
 </html>

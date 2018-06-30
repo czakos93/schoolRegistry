@@ -5,7 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
+import pl.dawidbronczak.spring.schoolRegistry.domain.Student;
 import pl.dawidbronczak.spring.schoolRegistry.domain.Teacher;
 import pl.dawidbronczak.spring.schoolRegistry.domain.User;
 import pl.dawidbronczak.spring.schoolRegistry.dto.PreAddGradeForm;
@@ -30,8 +32,9 @@ public class DesktopController {
 	SchoolClassService classService;
 	
 	@GetMapping(value={"/","/desktop"})
-	public String showDesktop(Model model, Principal principal){
-
+	public String showDesktop(Model model, @ModelAttribute("loggedUser") User loggedUser){
+		Student loggedStudent = (Student) loggedUser.getFunction();
+		model.addAttribute("loggedStudent", loggedStudent);
 		return "desktop";
 	}
 	

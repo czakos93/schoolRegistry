@@ -19,7 +19,6 @@ public class Student extends Function {
 	
 	@OneToMany(mappedBy = "student")
 	private Set<GradesList> gradesLists = new HashSet<>();
-
 	
 
 	

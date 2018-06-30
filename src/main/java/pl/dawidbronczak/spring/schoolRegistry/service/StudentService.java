@@ -6,6 +6,7 @@ import javax.validation.Valid;
 
 import pl.dawidbronczak.spring.schoolRegistry.domain.SchoolClass;
 import pl.dawidbronczak.spring.schoolRegistry.domain.Student;
+import pl.dawidbronczak.spring.schoolRegistry.domain.User;
 
 public interface StudentService{
 
@@ -21,5 +22,7 @@ public interface StudentService{
 	Set<Student> findBySchoolClass(SchoolClass schoolClass);
 
 	void delete(Student student);
+
+	Student findByOwner(User loggedUser);
 	
 }

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import pl.dawidbronczak.spring.schoolRegistry.domain.SchoolClass;
 import pl.dawidbronczak.spring.schoolRegistry.domain.Student;
+import pl.dawidbronczak.spring.schoolRegistry.domain.User;
 import pl.dawidbronczak.spring.schoolRegistry.repository.StudentRepository;
 import pl.dawidbronczak.spring.schoolRegistry.service.RoleService;
 import pl.dawidbronczak.spring.schoolRegistry.service.StudentService;
@@ -54,7 +55,11 @@ public class StudentServiceImpl implements StudentService {
 	@Override
 	public void delete(Student student) {
 		studentRepository.delete(student);
-		
+	}
+
+	@Override
+	public Student findByOwner(User loggedUser) {
+		return studentRepository.findByOwner(loggedUser);
 	}
 
 }
